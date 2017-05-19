@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Container, Content, Item, Input, Button, Icon, View, Text } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 
-import { setUser } from '../../actions/user';
+import { loginUser } from '../../actions/user';
 import styles from './styles';
 
 
@@ -21,6 +21,7 @@ class Login extends Component {
     super(props);
     this.state = {
       name: '',
+      password: '',
     };
   }
 
@@ -29,7 +30,7 @@ class Login extends Component {
   }
 
   login() {
-    this.setUser(this.state.name || 'Efosa Oyegun');
+    this.props.loginUser(this.state.name, this.state.password);
     Actions.home();
   }
 
@@ -43,11 +44,13 @@ class Login extends Component {
               <View style={styles.bg}>
                 <Item style={styles.input}>
                   <Icon active name="person" />
-                  <Input placeholder="EMAIL" onChangeText={name => this.setState({ name })} />
+                  <Input placeholder="EMAIL"
+                    onChangeText={name => this.setState({ name })} />
                 </Item>
                 <Item style={styles.input}>
                   <Icon name="unlock" />
                   <Input
+                    onChangeText={password => this.setState({ password })}
                     placeholder="PASSWORD"
                     secureTextEntry
                   />
@@ -66,7 +69,7 @@ class Login extends Component {
 
 function bindActions(dispatch) {
   return {
-    setUser: name => dispatch(setUser(name)),
+    loginUser: name => dispatch(loginUser(name)),
   };
 }
 
