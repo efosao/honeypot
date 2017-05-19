@@ -28,6 +28,11 @@ class Login extends Component {
     this.props.setUser(name);
   }
 
+  login() {
+    this.setUser(this.state.name || 'Efosa Oyegun');
+    Actions.home();
+  }
+
 
   render() {
     return (
@@ -47,7 +52,7 @@ class Login extends Component {
                     secureTextEntry
                   />
                 </Item>
-                <Button style={styles.btn} onPress={() => Actions.home()}>
+                <Button style={styles.btn} onPress={() => this.login()}>
                   <Text>Login</Text>
                 </Button>
               </View>
