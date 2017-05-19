@@ -8,6 +8,7 @@ import { Grid, Row } from 'react-native-easy-grid';
 
 import { setIndex } from '../../actions/list';
 import { openDrawer } from '../../actions/drawer';
+import CompFooter from '../footer';
 import styles from './styles';
 
 
@@ -62,28 +63,7 @@ class Home extends Component {
           <Text>{this.props.name ? this.props.name : 'XXXXXXXXX'}</Text>
           <Text>{JSON.stringify(this.props.data)}</Text>
           </Content>
-          <Footer >
-            <FooterTab>
-              <Button badge vertical>
-                  <Badge><Text>2</Text></Badge>
-                  <Icon name="apps" />
-                  <Text>Apps</Text>
-              </Button>
-              <Button>
-                  <Icon name="camera" />
-                  <Text>Camera</Text>
-              </Button>
-              <Button active badge vertical>
-                  <Badge ><Text>51</Text></Badge>
-                  <Icon active name="navigate" />
-                  <Text>Navigate</Text>
-              </Button>
-              <Button>
-                  <Icon name="person" />
-                  <Text>Contact</Text>
-              </Button>
-            </FooterTab>
-        </Footer>
+          <CompFooter />
       </Container>
     );
   }
