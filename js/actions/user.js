@@ -8,7 +8,8 @@ export const SET_USER = 'SET_USER';
 export function loginUser(email:string, password:string):Action {
   console.log('login user in...');
   if (!email || !password) {
-    // TODO: add default user account
+    email = 'sean@joinhoney.com';
+    password = 'Guitarpro5$';
   }
   const method = 'POST';
   return axios({

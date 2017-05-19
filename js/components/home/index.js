@@ -28,6 +28,8 @@ class Home extends Component {
   }
 
   render() {
+    const { user, name } = this.props;
+
     return (
       <Container style={styles.container}>
         <Header>
@@ -35,7 +37,7 @@ class Home extends Component {
           </Left>
 
           <Body>
-            <Title>{(this.props.name) ? this.props.name : 'Home'}</Title>
+            <Title>{(name) ? name : 'Home'}</Title>
           </Body>
 
           <Right>
@@ -47,16 +49,16 @@ class Home extends Component {
 
           <Content>
           <Grid>
-                        <Col style={{ }}>
-                          <Text>Gold: {get(this.props, 'user.available_points', '-')}</Text>
-                        </Col>
-                        <Col style={{ }}>
-                          <Image
-            style={{ height: 100, width: 100, borderRadius: 50, alignSelf: 'center' }}
-           source={{ uri: 'https://storage.googleapis.com/honey-user-images/7808947520680764164.png' }} />
-                        </Col>
-                    </Grid>
-
+            <Col style={{ }}>
+              <Text>Gold: {get(this.props, 'user.available_points', '-')}</Text>
+            </Col>
+            <Col style={{ }}>
+              <Image
+                style={{ height: 100, width: 100, borderRadius: 50, alignSelf: 'center' }}
+                source={{ uri: `https://storage.googleapis.com/honey-user-images/${user.id}.png` }} 
+              />
+            </Col>
+        </Grid>
           <Grid style={styles.mt}>
             {this.props.list.map((item, i) =>
               <Row key={i}>
