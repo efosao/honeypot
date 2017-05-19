@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions, ActionConst } from 'react-native-router-flux';
-import { Container, Header, Title, Content, Text, Button, Icon, Left, Body, Right } from 'native-base';
+import { Badge, Container, Header, Title, Content, Text, Button, Icon, Left, Body, Right, Footer, FooterTab } from 'native-base';
 import { Grid, Row } from 'react-native-easy-grid';
 
 import { setIndex } from '../../actions/list';
@@ -46,7 +46,7 @@ class Home extends Component {
           </Right>
         </Header>
 
-        <Content>
+          <Content>
           <Grid style={styles.mt}>
             {this.props.list.map((item, i) =>
               <Row key={i}>
@@ -59,7 +59,31 @@ class Home extends Component {
               </Row>
             )}
           </Grid>
-        </Content>
+          <Text>{this.props.name ? this.props.name : 'XXXXXXXXX'}</Text>
+          <Text>{JSON.stringify(this.props.data)}</Text>
+          </Content>
+          <Footer >
+            <FooterTab>
+              <Button badge vertical>
+                  <Badge><Text>2</Text></Badge>
+                  <Icon name="apps" />
+                  <Text>Apps</Text>
+              </Button>
+              <Button>
+                  <Icon name="camera" />
+                  <Text>Camera</Text>
+              </Button>
+              <Button active badge vertical>
+                  <Badge ><Text>51</Text></Badge>
+                  <Icon active name="navigate" />
+                  <Text>Navigate</Text>
+              </Button>
+              <Button>
+                  <Icon name="person" />
+                  <Text>Contact</Text>
+              </Button>
+            </FooterTab>
+        </Footer>
       </Container>
     );
   }
@@ -74,6 +98,7 @@ function bindAction(dispatch) {
 
 const mapStateToProps = state => ({
   name: state.user.name,
+  data: state.user.data,
   list: state.list.list,
 });
 
