@@ -1,5 +1,6 @@
 
 import React, { Component } from 'react';
+import { WebView } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { Container, Header, Title, Content, Text, Button, Icon, Left, Right, Body } from 'native-base';
@@ -18,6 +19,15 @@ class BlankPage extends Component {
 
   render() {
     const { props: { name, index, list } } = this;
+
+    let jsCode = `
+      var parent = document.querySelector('#unifiedPrice_feature_div');
+      var p = document.createElement("p");
+      p.append("----> Honey Savings <----");
+      parent.appendChild(p);
+      parent.style.backgroundColor = 'yellow';
+      parent.style.color = 'red';
+    `;
 
     return (
       <Container style={styles.container}>
@@ -39,10 +49,13 @@ class BlankPage extends Component {
           </Right>
         </Header>
 
+
         <Content padder>
-          <Text>
-            {(!isNaN(index)) ? list[index] : 'Create Something Awesome . . .'}
-          </Text>
+          <WebView
+            source={{uri: 'https://www.amazon.com/gp/product/B01M18UZF5/ref=s9_acss_bw_cg_cegwcacl_2c1_w?pf_rd_m=ATVPDKIKX0DER&pf_rd_s=unified-hybrid-3&pf_rd_r=W5XHW3RGA2ASVA8CNW6W&pf_rd_t=101&pf_rd_p=8bf99254-28ca-4da6-b713-a13668db6d1a&pf_rd_i=565108'}}
+            style={{marginTop: 10, height: 560 }}
+            injectedJavaScript={jsCode}
+          />
         </Content>
       </Container>
     );
