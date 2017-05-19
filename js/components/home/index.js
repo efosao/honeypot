@@ -1,10 +1,11 @@
 
 import React, { Component } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { Image, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions, ActionConst } from 'react-native-router-flux';
-import { Badge, Container, Header, Title, Content, Text, Button, Icon, Left, Body, Right, Footer, FooterTab } from 'native-base';
-import { Grid, Row } from 'react-native-easy-grid';
+import { Badge, Container, Header, Title, Content, Text, Button, Icon, Left, Body, Right } from 'native-base';
+import { Col, Grid, Row } from 'react-native-easy-grid';
+import { get } from 'lodash';
 
 import { setIndex } from '../../actions/list';
 import { openDrawer } from '../../actions/drawer';
@@ -31,9 +32,6 @@ class Home extends Component {
       <Container style={styles.container}>
         <Header>
           <Left>
-            <Button transparent onPress={() => Actions.login({ type: ActionConst.RESET })}>
-              <Icon active name="power" />
-            </Button>
           </Left>
 
           <Body>
@@ -48,6 +46,17 @@ class Home extends Component {
         </Header>
 
           <Content>
+          <Grid>
+                        <Col style={{ }}>
+                          <Text>Gold: {get(this.props, 'user.available_points', '-')}</Text>
+                        </Col>
+                        <Col style={{ }}>
+                          <Image
+            style={{ height: 100, width: 100, borderRadius: 50, alignSelf: 'center' }}
+           source={{ uri: 'https://storage.googleapis.com/honey-user-images/7808947520680764164.png' }} />
+                        </Col>
+                    </Grid>
+
           <Grid style={styles.mt}>
             {this.props.list.map((item, i) =>
               <Row key={i}>
@@ -60,8 +69,6 @@ class Home extends Component {
               </Row>
             )}
           </Grid>
-          <Text>{this.props.name ? this.props.name : 'XXXXXXXXX'}</Text>
-          <Text>{JSON.stringify(this.props.data)}</Text>
           </Content>
           <CompFooter />
       </Container>
@@ -78,7 +85,7 @@ function bindAction(dispatch) {
 
 const mapStateToProps = state => ({
   name: state.user.name,
-  data: state.user.data,
+  user: state.user.data,
   list: state.list.list,
 });
 

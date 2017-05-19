@@ -1,8 +1,8 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Content, Text, ListItem } from 'native-base';
-import { Actions } from 'react-native-router-flux';
+import { Button, Content, Icon, Text, ListItem } from 'native-base';
+import { Actions, ActionConst } from 'react-native-router-flux';
 
 import { closeDrawer } from '../../actions/drawer';
 import { setIndex } from '../../actions/list';
@@ -29,6 +29,12 @@ class SideBar extends Component {
         </ListItem>
         <ListItem button onPress={() => { Actions.blankPage(); this.props.closeDrawer(); }} >
           <Text>Blank Page</Text>
+        </ListItem>
+        <ListItem button onPress={() => {
+              Actions.login({ type: ActionConst.RESET });
+              this.props.closeDrawer();
+            }}>
+            <Text>Logout</Text>
         </ListItem>
       </Content>
     );
